@@ -122,6 +122,7 @@
       .then(data => {
         const projectsContainer = document.getElementById('projects');
         data.forEach(project => {
+            if(project.name!=="ps"){
           const projectDiv = document.createElement('div');
           projectDiv.classList.add('project');
         
@@ -143,6 +144,7 @@
           projectDiv.appendChild(projectDescription);
 
           projectsContainer.appendChild(projectDiv);
+        }
         });
       })
       .catch(error => console.log(error));
