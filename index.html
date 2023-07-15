@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet"> <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>core.dev</title>
+  <style>
+    body {
+     font-family: 'Mukta',sans-serif; 
+      margin: 0;
+      padding: 20px;
+      color: #ccc6c6;
+      background-color: #121212;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+    }
+    
+   h4{
+    font-size:16px;
+   }
+
+    p {
+      font-size: 20px;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    strong {
+      color: whitesmoke;  
+      font-weight: bold;
+    }
+    a {
+      display: inline-block;
+      text-decoration: none;
+      color: whitesmoke;
+      position: relative;
+      overflow: hidden;
+    }
+
+    a::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color:whitesmoke;
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+
+    a:hover::before {
+      width: 100%;
+    }
+    
+
+    .footer-link {
+      margin-left: 20px;
+    }
+
+    .project {
+      margin-bottom: 15px;
+    }
+
+    .project h3 {
+      margin: 0;
+    }
+
+    .project p {
+      margin: 5px 0;
+    }
+
+    .project a {
+      color: whitesmoke;
+      text-decoration: none;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div>
+    <h2>core</h2>
+    <p>Hi i am <strong>Suvham Paul</strong> aka core.I'm a 20-year-old developer who loves to build things<br>
+     and learn new ideas. 
+    I enjoy working with <strong>backend architecture</strong>, <strong>embedded systems</strong>,<br>
+    <strong>processors</strong>, and space.</p>
+
+    <p>Right now, I'm learning <strong>Rust</strong> and reading books <br> 
+        on embedded systems. 
+        I also go to the gym regularly to stay fit.</p>
+  </div>
+  <div class="projectdiv">
+        <h3>Github projects</h2>
+        <div id="projects"></div>
+    </div>
+  <div>
+    <p class="footer">
+      <a target="_blank" href="https://github.com/suv-900" class="footer-link" >gitHub</a> 
+      <a target="_blank" href="https://twitter.com/sleepyasfaboner" class="footer-link">twitter</a>   
+      <a target="_blank" href="https://www.linkedin.com/in/suvham-paul-35855b255/" class="footer-link" >linkedIn</a>
+      <a target="_blank" class="footer-link"
+        href="mailto:paulsuvham36@gmail.com"
+      
+        class="email"
+      >gmail</a>
+    </p>
+  </div>
+</body>
+
+
+<script>
+
+    fetch('https://api.github.com/users/suv-900/repos')
+      .then(response => response.json())
+      .then(data => {
+        const projectsContainer = document.getElementById('projects');
+        data.forEach(project => {
+          const projectDiv = document.createElement('div');
+          projectDiv.classList.add('project');
+        
+          const projectLink = document.createElement('p');
+          const projectLinkAnchor = document.createElement('a');
+          projectLinkAnchor.href = project.html_url;
+          projectLinkAnchor.textContent = "• "+project.name;
+          projectLinkAnchor.target="_blank"
+
+          const projectDescription = document.createElement('p');
+          projectDescription.textContent = project.description;
+
+         
+
+          projectLink.appendChild(projectLinkAnchor);
+
+          projectDiv.appendChild(projectLink);
+     
+          projectDiv.appendChild(projectDescription);
+
+          projectsContainer.appendChild(projectDiv);
+        });
+      })
+      .catch(error => console.log(error));
+      
+  </script>
+</html>
