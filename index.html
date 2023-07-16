@@ -121,8 +121,8 @@
       .then(response => response.json())
       .then(data => {
         const projectsContainer = document.getElementById('projects');
-        data.forEach(project => {
-            if(project.name!=="ps"){
+          data.forEach(project => {
+            if(project.name!=="core"){
           const projectDiv = document.createElement('div');
           projectDiv.classList.add('project');
         
